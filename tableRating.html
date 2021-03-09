@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4">
+				<div id="app">
+  <h3>
+  Sorting by
+  <input type="text" v-model="filterText">
+  <button @click="sortLowest" class="btn btn-success">lovest Rated</button>
+  <button @click="sortHighest" class="btn btn-success">highest Rated</button>
+  </h3>
+  <table class="table table-hover">
+    <thread>
+      <tr class="warning">
+        <th v-for="key in columns">
+          {{key}}
+        </th>
+      </tr>
+    </thread>
+    <tbody>
+      <tr v-for="entry in ratingsInfo" class="info">
+        <td v-for="key in columns">
+          {{entry[key]}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+			</div>
+		</div>
+	</div>
+
+
+
+
+</body>
+
+<script>
+	new Vue ({
+el:"#app",
+data:{
+columns:["title","rating"],
+ratingsInfo:[
+{title :"White Chiches",rating:82},
+{title :"Red Chiches",rating:78},
+{title :"Black Chiches",rating:98},
+{title :"Yellow Chiches",rating:38},
+{title :"Test Chiches",rating:28},
+
+],
+filterText:""
+},
+methods:{
+sortLowest:function(){
+this.ratingsInfo.sort((a,b)=>a.rating > b.rating ? 1: -1);
+
+},
+sortHighest:function(){
+this.ratingsInfo.sort((a,b)=>a.rating < b.rating ? 1: -1);
+
+},
+},
+// computed:{
+// 	filteredFilms(){
+// 		let filter=new RegExp(this.filterText,i)
+
+// 		return this.ratingsInfo.filter(el => el.title.match(filter))
+// 	}
+// }
+})
+
+
+</script>
+</html>
